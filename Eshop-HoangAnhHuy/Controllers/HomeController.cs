@@ -38,6 +38,8 @@ namespace Eshop_HoangAnhHuy.Controllers
             var eshopContext = _context.Products.Include(p => p.ProductType).OrderByDescending(p => p.Id).Take(3);
             return View(await eshopContext.ToListAsync());
             //return View();
+            //abc;
+            //asd
         }
 
         public IActionResult Privacy()
