@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Eshop_HoangAnhHuy.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div id="content" class="float_r">
+    <h1> Products</h1>
+    @{
+        int i = 0;
+        foreach (var item in Model)
+        {
+            i++;
+            <div class="product_box">
+                <a h asp-controller="Products" asp-action="Details" asp-route-id="@item.Id"><img src="~/images/product/@item.Image" class="card-img-top" style="width: 200px;"></a>
+                <p>@Html.DisplayFor(modelItem => item.Description).</p>
+                <p class="product_price">@Html.DisplayFor(modelItem => item.Price)</p>
+                <form asp-controller="Carts" asp-action="Add" asp-route-id="@item.Id">
+                    <button type="submit"><a name="quantity" value="1" class="addtocart"></a></button>
+                </form>
+                @*<a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="detail"></a>*@
+            </div>
+
+            if (i % 3 == 0)
+            {
+                <div class="cleaner"></div>
+            }
+        }
+    }
+ </div>
+<div class="cleaner"></div>

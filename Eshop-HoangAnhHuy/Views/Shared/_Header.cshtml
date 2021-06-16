@@ -1,0 +1,56 @@
+﻿@*@model IEnumerable<Eshop_HoangAnhHuy.Models.Product>*@
+@{ 
+    string username = ViewBag.Username;
+}
+<div id="templatemo_header">
+    <div id="site_title"><h1><a href="#">Online Book Store</a></h1></div>
+    <div id="header_right">
+        <p>
+            <a asp-controller="Accounts" asp-action="Details">My Account</a> |
+            <a asp-controller="Carts" asp-action="Index">My Cart</a> |
+            @{
+                if (username != null)
+                {
+                    <a asp-controller="Accounts" asp-action="Details">Hi @username</a>
+                    <a asp-controller="Accounts" asp-action="Logout">Log Out</a>
+                }
+                else
+                {
+                    <a asp-controller="Accounts" asp-action="Login">Log In</a>
+                }
+            }
+        </p>
+        @*<p>
+            Shopping Cart: <strong>3 items</strong> ( <a href="shoppingcart.html">Show Cart</a> )
+        </p>*@
+    </div>
+    <div class="cleaner"></div>
+</div> <!-- END of templatemo_header -->
+<div id="templatemo_menubar">
+    <div id="top_nav" class="ddsmoothmenu">
+        <ul>
+            <li><a asp-controller="Home" asp-action="Index" class="selected">Home</a></li>
+            <li>
+                <a asp-controller="Products" asp-action="Index" asp-route-id="">Products</a>
+                <ul>
+                    @{
+                        foreach (var item in ViewBag.ProductTypeId)
+                        {
+                            <li><a asp-controller="Products" asp-action="Index" asp-route-id="@item.Value">@item.Text</a></li>
+                        }
+                    }
+
+                </ul>
+            </li>
+            @*<li><a href="checkout.html">Checkout</a></li>
+            <li><a href="contact.html">Contact Us</a></li>*@
+        </ul>
+        <br style="clear: left" />
+    </div> <!-- end of ddsmoothmenu -->
+    <div id="templatemo_search">
+        <form action="#" method="get">
+            <input type="text" value=" " name="keyword" id="keyword" title="keyword" onfocus="clearText(this)" onblur="clearText(this)" class="txt_field" />
+            <input type="submit" name="Search" value=" " alt="Search" id="searchbutton" title="Search" class="sub_btn" />
+        </form>
+    </div>
+</div> <!-- END of templatemo_menubar -->

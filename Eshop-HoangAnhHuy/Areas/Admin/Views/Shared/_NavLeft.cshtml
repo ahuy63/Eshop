@@ -1,0 +1,56 @@
+﻿@*@model IEnumerable<Eshop_HoangAnhHuy.Models.Product>*@
+
+<script type="text/javascript">
+    try { ace.settings.loadState('sidebar') } catch (e) { }
+</script>
+
+<ul class="nav nav-list">
+    <li class="active">
+        <a asp-controller="Products" asp-action="Index" asp-route-id="">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text"> Dashboard </span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+    <li class="">
+        <a href="#" class="dropdown-toggle">
+            <i class="menu-icon fa fa-desktop"></i>
+            <span class="menu-text"> Products </span>
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+        <b class="arrow"></b>
+        <ul class="submenu">
+            @{
+                foreach (var item in ViewBag.ProductTypeId)
+                {
+                    <li class="">
+                        <a asp-controller="Products" asp-action="Index" asp-route-id="@item.Value">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                           @item.Text
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                }
+            }
+        </ul>
+    </li>
+    <li class="">
+        <a asp-controller="Accounts" asp-action="Index">
+            <i class="menu-icon fa fa-picture-o"></i>
+            <span class="menu-text"> Accounts </span>
+        </a>
+        <b class="arrow"></b>
+    </li>
+    <li class="">
+        <a asp-controller="Invoices" asp-action="Index">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text"> Invoices </span>
+        </a>
+        <b class="arrow"></b>
+    </li>
+</ul><!-- /.nav-list -->
+
+<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+    <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+</div>

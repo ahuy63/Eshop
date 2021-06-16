@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["title"] = "ProductTypeId";
+}
+<div id="sidebar" class="float_l">
+    <div class="sidebar_box">
+        <span class="bottom"></span>
+        <h3>Categories</h3>
+        <div class="content">
+            <ul class="sidebar_list">
+                @{
+                    foreach (var item in ViewBag.ProductTypeId)
+                    {
+                    <li class="first"><a asp-controller="Products" asp-action="Index" asp-route-id="@item.Value">@item.Text</a></li>
+                    }
+
+                    <li class="last"></li>
+                }
+
+
+            </ul>
+        </div>
+    </div>
+</div>  

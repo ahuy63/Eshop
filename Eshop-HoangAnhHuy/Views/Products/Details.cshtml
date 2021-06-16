@@ -1,0 +1,79 @@
+﻿
+@model Eshop_HoangAnhHuy.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+    //string name = ViewBag.Username;
+}
+
+
+<div id="content" class="float_r">
+    <h1>Product Detail</h1>
+    <div class="content_half float_l">
+        <a rel="lightbox[portfolio]" href="images/product/"><img src="/images/product/@Model.Image" alt="image"  style="width: 200px;"/></a>
+    </div>
+    <div class="content_half float_r">
+        <form asp-controller="Carts" asp-action="Add" asp-route-id="@Model.Id">
+            <table>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Name)</td>
+                    <td>@Html.DisplayFor(model => model.Name)</td>
+                </tr>
+                <tr>
+                    <td width="160">Price:</td>
+                    <td>@Html.DisplayFor(model => model.Price)</td>
+                </tr>
+                <tr>
+                    <td>Availability:</td>
+                    <td>
+                        @{
+                            if (Model.Stock > 0)
+                            {
+                                <span>In Stock</span>
+                            }
+                            else
+                            {
+                                <span>Sold Out</span>
+                            }
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.ProductType.Name):</td>
+                    <td>@Html.DisplayFor(model => model.ProductType.Name)</td>
+                </tr>
+
+                <tr>
+                    <td>Quantity</td>
+                    <td><input type="text" value="1" style="width: 20px; text-align: right" name="quantity"/></td>
+                </tr>
+            </table>
+            <div class="cleaner h20"></div>
+
+            <button type="submit"><a class="addtocart"></a></button>
+        </form>
+    </div>
+    <div class="cleaner h30"></div>
+
+    <h5>@Html.DisplayNameFor(model => model.Description)</h5>
+    <p>@Html.DisplayFor(model => model.Description)</p>
+
+    <div class="cleaner h50"></div>
+
+    <h3>Related Products</h3>
+    @{ 
+        foreach(var item in ViewBag.RelatedProduct)
+            {
+        <div class="product_box">
+            <a asp-action="Details" asp-route-id="@item.Id"><img src="/images/product/@item.Image" alt=""  style="width: 100px;"/></a>
+            <h3>@item.Name</h3>
+            <p class="product_price">@item.Price</p>
+            <a asp-controller="Carts" asp-action="Add" asp-route-id="@item.Id" class="addtocart"></a>
+            <a asp-action="Details" asp-route-id="@item.Id" class="detail"></a>
+        </div>
+            }
+    }
+    
+
+</div>
+<div class="cleaner"></div>

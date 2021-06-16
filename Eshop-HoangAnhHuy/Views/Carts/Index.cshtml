@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Eshop_HoangAnhHuy.Models.Cart>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div id="content" class="float_r">
+    <h1>Shopping Cart</h1>
+        <table width="680px" cellspacing="0" cellpadding="5">
+            <tr bgcolor="#ddd">
+                <th width="220" align="left">Image </th>
+                <th width="180" align="left">Description </th>
+                <th width="100" align="center">Quantity </th>
+                <th width="60" align="right">Price </th>
+                <th width="60" align="right">Total </th>
+                <th width="90"> </th>
+            </tr>
+            @{int sum = 0; }
+            @foreach (var item in Model)
+            {
+                int id = @item.Product.Id;
+                <tr>
+                    <td><img src="/images/product/@item.Product.Image" alt="image 1" style="width: 100px" /></td>
+                    <td>@item.Product.Description</td>
+                    <td align="center"><input type="text" value="@item.Quantity" id="@id" style="width: 20px; text-align: right" onfocusout="UpdateQuantity(@id)"> </td>
+                    <td align="right">@item.Product.Price </td>
+                    @{
+                        int total = item.Product.Price * item.Quantity;
+                        sum += total;
+                    }
+                    <td align="right">@total </td>
+                    <td align="center"> <a asp-controller="Carts" asp-action="DeleteConfirmed" asp-route-id="@item.Id"><img src="images/remove_x.gif" alt="remove" /><br />Remove</a> </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="3" align="right" height="30px"></td>
+                <td align="right" style="background:#ddd; font-weight:bold"> Total </td>
+                <td align="right" style="background:#ddd; font-weight:bold">@sum </td>
+                <td style="background:#ddd; font-weight:bold"> </td>
+            </tr>
+        </table>
+        <div style="float:right; width: 215px; margin-top: 20px;">
+            <p><a asp-controller="Invoices" asp-action="Create" asp-route-id="@ViewBag.accountID">Checkout</a></p>
+            <p><a asp-controller="Products" asp-action="Index" asp-route-id="">Continue shopping</a></p>
+        </div>
+</div>
+<div class="cleaner"></div>
+<script type="text/javascript">
+        function UpdateQuantity(id) {
+            $quantity = +document.getElementById(id).value;
+            /*alert($quantity);*/
+            @*$a = '@Url.Action("UpdateQuantity", new {Id = "id", Quantity = "quantity" })'.replace("id", id).replace("quantity", $quantity);
+            alert($a);*@
+                window.location.href = ' @Html.Raw(@Url.Action("UpdateQuantity", "Carts", new {Id = "id", Quantity = "quantity" }))'.replace("id", id).replace("quantity", $quantity);
+
+    }
+</script>

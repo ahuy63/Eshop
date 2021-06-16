@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Eshop_HoangAnhHuy.Models.Product>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="content" class="float_r">
+
+    <div id="slider-wrapper">
+        <div id="slider" class="nivoSlider">
+            <img src="images/slider/02.jpg" alt="" />
+            <a href="#"><img src="images/slider/01.jpg" alt="" title="This is an example of a caption" /></a>
+            <img src="images/slider/03.jpg" alt="" />
+            <img src="images/slider/04.jpg" alt="" title="#htmlcaption" />
+        </div>
+        <div id="htmlcaption" class="nivo-html-caption">
+            <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+        </div>
+    </div>
+    <script type="text/javascript" src="js/jquery-1.4.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery.nivo.slider.pack.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $('#slider').nivoSlider();
+        });
+    </script>
+
+    <h1>New Products</h1>
+    @{
+        int i = 0;
+        foreach (var item in Model)
+        {
+            i++;
+            <div class="product_box">
+                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id"><img src="~/images/product/@item.Image" class="card-img-top"style="width: 200px;"></a>
+                <p>@Html.DisplayFor(modelItem => item.Description).</p>
+                <p class="product_price">$@Html.DisplayFor(modelItem => item.Price)</p>
+                <form asp-controller="Carts" asp-action="Add" asp-route-id="@item.Id">
+                    <button type="submit"><a name="quantity" value="1" class="addtocart"></a></button>
+                </form>
+                    @*<a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="detail"></a>*@
+                
+            </div>
+
+            if (i % 3 == 0)
+            {
+                <div class="cleaner"></div>
+            }
+        }
+    }
+</div>
+<div class="cleaner"></div>

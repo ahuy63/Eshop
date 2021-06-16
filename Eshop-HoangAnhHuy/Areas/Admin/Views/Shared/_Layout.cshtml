@@ -1,0 +1,117 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>Blank Page - Ace Admin</title>
+
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+    <!-- page specific plugin styles -->
+    <!-- text fonts -->
+    <link rel="stylesheet" href="/css/fonts.googleapis.com.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <![endif]-->
+    <link rel="stylesheet" href="/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="/css/ace-rtl.min.css" />
+
+    <!--[if lte IE 9]>
+      <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+    <![endif]-->
+    <!-- inline styles related to this page -->
+    <!-- ace settings handler -->
+    <script src="/js/ace-extra.min.js"></script>
+
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="assets/js/html5shiv.min.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="no-skin">
+    <div id="navbar" class="navbar navbar-default ace-save-state">
+        <partial name="_NavTop" />
+    </div>
+    <div class="main-container ace-save-state" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.loadState('main-container') } catch (e) { }
+        </script>
+        <div id="sidebar" class="sidebar responsive ace-save-state">
+            <partial name="_NavLeft" />
+        </div>
+        <div class="main-content">
+            @RenderBody()
+        </div><!-- /.main-content -->
+    </div>
+    <div class="footer">
+        <div class="footer-inner">
+            <partial name="_Footer" />
+        </div>
+    </div>
+
+
+
+    <!-- basic scripts -->
+    <!--[if !IE]> -->
+    <script src="/js/jquery-2.1.4.min.js"></script>
+
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script src="assets/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/js/jquery.dataTables.bootstrap.min.js"></script>
+    <script src="/js/dataTables.buttons.min.js"></script>
+    <script src="/js/buttons.flash.min.js"></script>
+    <script src="/js/buttons.html5.min.js"></script>
+    <script src="/js/buttons.print.min.js"></script>
+    <script src="/js/buttons.colVis.min.js"></script>
+    <script src="/js/dataTables.select.min.js"></script>
+
+    <!-- ace scripts -->
+    <script src="/js/ace-elements.min.js"></script>
+    <script src="/js/ace.min.js"></script>
+
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        function DeleteProduct(id) {
+            //alert(id);
+            @*$a = '@Url.Action("DeleteConfirmed", new {Id = "id" })'.replace("id",id);
+            alert($a);*@
+            if (confirm("Confirm Delete?")) {
+                //alert('<?php echo BASE_URL?>/?controller=AdminCRUDController&action=delete&product_id='+id);
+
+                window.location.href = '@Url.Action("DeleteConfirmed", new {Id = "id" })'.replace("id",id);
+
+            }
+            else return false;
+        }
+
+        jQuery(function ($) {
+            $('.show-details-btn').on('click', function (e) {
+                e.preventDefault();
+                $(this).closest('tr').next().toggleClass('open');
+                $(this).find(ace.vars['.icon']).toggleClass('fa-angle-double-down').toggleClass('fa-angle-double-up');
+            });
+        })
+    </script>
+</body>
+</html>
